@@ -109,4 +109,22 @@ public class AddMemberService {
 	public List<MemberEntity> getAllMembers(String email){
 		return memberDAO.viewAllMembers(email);
 	}
+	
+	public MemberEntity getEntityById(int id) {
+		return memberDAO.getEntityById(id);
+	}
+	
+	public boolean updateMemberDetails(int memberId,String memberNamename,String gender,String dob,
+			String governmentId,long idProof,String vaccineType,int dose,String email) {
+		MemberEntity entity = new MemberEntity(memberId,memberNamename, gender, dob, governmentId, idProof, vaccineType, dose,email);
+		return memberDAO.updateMemberEntity(entity);
+	}
+	
+	public boolean deleteMemberEntityById(int id) {
+		return memberDAO.deleteMemberEntityById(id);
+	}
+	
+	public int decreaseMemberCount(String email, int memberCount) {
+		return memberDAO.decreaseMemberCount(email, memberCount);
+	}
 }

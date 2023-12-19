@@ -189,7 +189,8 @@ input[type="radio"] {
 		<input type="submit" value="Submit">
 	</form>
 	<p>${addMessage }</p>
-
+	 <h2><p>${updateMessage}</p></h2>
+	 <h2><p>${deleteMessage}</p></h2>
 	<table class="members-table">
 		<thead>
 			<tr>
@@ -201,6 +202,8 @@ input[type="radio"] {
 				<th>ID PROOF</th>
 				<th>VACCINE TYPE</th>
 				<th>DOSE</th>
+				<th>EDIT</th>
+				<th>DELETE</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -214,11 +217,13 @@ input[type="radio"] {
 					<td>${member.idProof}</td>
 					<td>${member.vaccineType}</td>
 					<td>${member.dose}</td>
+					<td><a href="editMembers/${member.memberId}">Edit</a></td>
+					<td><a href="deleteMember/${member.memberId}">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-
+	
 
 	<footer> footer </footer>
 </body>

@@ -120,4 +120,91 @@ public class MemberDAOImpl implements MemberDAO {
 		}
 		return count;
 	}
+
+	@Override
+	public MemberEntity getEntityById(int memberId) {
+		Session session = null;
+		MemberEntity entity = null;
+		try {
+			session = sessionFactory.openSession();
+			entity = session.get(MemberEntity.class, memberId);
+			if(entity != null) {
+				return entity;
+			}else {
+				System.out.println("entity is null");
+			}
+		}
+		finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return entity;
+	}
+
+	@Override
+	public boolean updateMemberEntity(MemberEntity entity) {
+		boolean flag = false;
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			Transaction transaction = session.beginTransaction();
+			session.update(entity);
+			transaction.commit();
+			flag = true;
+		}
+		finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean deleteMemberEntityById(int id) {
+		
+		boolean flag = false;
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			Transaction transaction = session.beginTransaction();
+			MemberEntity entity = session.get(MemberEntity.class, id);
+			session.delete(entity);
+			transaction.commit();
+			flag = true;
+		}
+		finally {
+			if(session != null) {
+				session.close();
+			}
+		}
+		return flag;
+	}
+	
+	@Override
+	public int decreaseMemberCount(String email, int memberCount) {
+		Session session = null;
+		Query query = null;
+		Transaction transaction = null;
+		int increaseCount = --memberCount;
+		int count=0;
+		String hql= "UPDATE RegisterEntity set memberCount="+increaseCount+" WHERE email='"+email+"'";
+		try {
+			session = sessionFactory.openSession();
+			query = session.createQuery(hql);
+			transaction = session.beginTransaction();
+			count = query.executeUpdate();
+			transaction.commit();
+		}catch(HibernateException hibernateException) {
+			transaction.rollback();
+			System.out.println("Transaction has been rolled back "+ hibernateException.getMessage());
+		}finally {
+			if(session!=null) {
+				session.close();
+				System.out.println("session is closed");
+			}
+		}
+		return count;
+	}
 }

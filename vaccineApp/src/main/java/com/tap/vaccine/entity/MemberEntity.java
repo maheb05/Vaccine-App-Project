@@ -40,6 +40,31 @@ public class MemberEntity {
 	public MemberEntity() {
 		System.out.println("Default Member Entity constructor");
 	}
+	
+	public MemberEntity(int memberId, String memberName, String gender, String dob, String governamentID, long idProof,
+			String vaccineType, int dose,String userEmail) {
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.gender = gender;
+		this.dob = dob;
+		this.governamentID = governamentID;
+		this.idProof = idProof;
+		this.vaccineType = vaccineType;
+		this.dose = dose;
+		this.userEmail = userEmail;
+	}
+	
+	public MemberEntity( String memberName, String gender, String dob, String governamentID, long idProof,
+			String vaccineType, int dose) {
+		super();
+		this.memberName = memberName;
+		this.gender = gender;
+		this.dob = dob;
+		this.governamentID = governamentID;
+		this.idProof = idProof;
+		this.vaccineType = vaccineType;
+		this.dose = dose;
+	}
 
 	public MemberEntity( String memberName, String gender, String dob, String governamentID, long idProof,
 			String vaccineType, int dose,String userEmail) {
